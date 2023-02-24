@@ -258,3 +258,43 @@ void test_transposeMatrix() {
     freeMemMatrix(m_transposed);
     freeMemMatrix(m_afterTranspExample);
 }
+
+//------------
+
+// Возвращает позицию минимального элемента матрицы m:
+Position getMinValuePos(Matrix m) {
+    int minElement = m.values[0][0];
+    int rowIndex, colIndex, j, i;
+    for (rowIndex = 0; rowIndex < m.nRows; rowIndex++) {
+        for (colIndex = 0; colIndex < m.nCols; colIndex++) {
+            if (m.values[rowIndex][colIndex] <= minElement) {
+                minElement = m.values[rowIndex][colIndex];
+                j = rowIndex;
+                i = colIndex;
+            }
+        }
+    }
+    Position ResultPosition;
+    ResultPosition.rowIndex = i;
+    ResultPosition.colIndex= j;
+    return ResultPosition;
+}
+
+// Возвращает позицию максимального элемента матрицы m:
+Position getMaxValuePos(Matrix m) {
+    int maxElement = m.values[0][0];
+    int rowIndex, colIndex, i, j;
+    for (rowIndex = 0; rowIndex < m.nRows; rowIndex++) {
+        for (colIndex = 0; colIndex < m.nCols; colIndex++) {
+            if (m.values[rowIndex][colIndex] >= maxElement) {
+                maxElement = m.values[rowIndex][colIndex];
+                i = rowIndex;
+                j = colIndex;
+            }
+        }
+    }
+    Position ResultPosition;
+    ResultPosition.rowIndex = j;
+    ResultPosition.colIndex = i;
+    return ResultPosition;
+}
