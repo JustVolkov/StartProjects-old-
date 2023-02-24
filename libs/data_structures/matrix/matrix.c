@@ -205,3 +205,56 @@ bool isSymmetricMatrix(Matrix* m) {
         return true;
     }
 }
+
+//------------
+
+// Транспонирование квадратной матрицы m:
+void transposeSquareMatrix(Matrix* m) {
+    int startIndexForNextIteration = 0;
+    for (int rowIndex = 0; rowIndex < m->nRows; rowIndex++) {
+        for (int colIndex = startIndexForNextIteration; colIndex < m->nRows; colIndex++) {
+            swap_pointers(&m->values[rowIndex][colIndex], &m-> values[colIndex][rowIndex]);
+        }
+        startIndexForNextIteration++;
+    }
+}
+
+// Тестирование функции transposeSquareMatrix путём ввода произвольной матрицы
+// и сравнения полученного результата с ожидаемым (с помощью assert):
+void test_transposeSquareMatrix() {
+    Matrix m = createMatrixFromArray((int[]) { 1, 3, 7, 5, 63, 26, 19, 0, 1 }, 3, 3);
+    transposeSquareMatrix(&m);
+    Matrix transposed_m = createMatrixFromArray((int[]) { 1, 5, 19, 3, 63, 0, 7, 26, 1 }, 3, 3);
+    for (int i = 0; i < m.nRows; i++) {
+        for (int l = 0; l < m.nRows; l++) {
+            assert(m.values[i][l] == transposed_m.values[i][l]);
+        }
+    }
+}
+
+ // Транспонирование матрицы m. Возвращает транспонированную матрицу.
+Matrix transposeMatrix(Matrix* m) {
+    Matrix transposedMatrix = getMemMatrix(m->nCols, m->nRows);
+    for (int rowIndex = 0; rowIndex < m->nRows; rowIndex++) {
+        for (int colIndex = 0; colIndex < m->nCols; colIndex++) {
+            transposedMatrix.values[colIndex][rowIndex] = m-> values[rowIndex][colIndex];
+        }
+    }
+    return transposedMatrix;
+}
+
+// Тестирование функции transposeMatrix  путём ввода произвольной матрицы
+// и сравнения полученного результата с ожидаемым (с помощью assert):
+void test_transposeMatrix() {
+    Matrix m = createMatrixFromArray((int[]) { 4, 14, 6, 65, 1, 5, 3, 17, 18, 0 }, 5, 2);
+    Matrix m_transposed = transposeMatrix(&m);
+    Matrix m_afterTranspExample = createMatrixFromArray((int[]) { 4, 6, 1, 3, 18, 14, 65, 5, 17, 0 }, 2, 5);
+
+    for (int i = 0; i < m_transposed.nRows; i++) {
+        for (int l = 0; l < m_transposed.nCols; l++) {
+            assert(m_afterTranspExample.values[i][l] == m_transposed.values[i][l]);
+        }
+    }
+    freeMemMatrix(m_transposed);
+    freeMemMatrix(m_afterTranspExample);
+}
