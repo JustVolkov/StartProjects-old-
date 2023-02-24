@@ -14,6 +14,8 @@ void swap_pointers(int** a, int** b) {
     *b = t;
 }
 
+//------------
+
 // Размещает в динамической памяти матрицу размером nRows на nCols. Возвращает матрицу.
 Matrix getMemMatrix(int nRows, int nCols) {
     int** values = (int**)malloc(sizeof(int*) * nRows);
@@ -31,4 +33,19 @@ Matrix* getMemArrayOfMatrices(int nMatrices, int nRows, int nCols) {
     return ms;
 }
 
+//------------
 
+// Освобождает память, выделенную под хранение матрицы m:
+void freeMemMatrix(Matrix m) {
+    for (int i = 0; i < m.nRows; i++)
+        free(m.values[i]);
+    free(m.values);
+}
+
+// Освобождает память, выделенную под хранение массива ms из nMatrices матриц:
+void freeMemMatrices(Matrix* m, int nRows) {
+    for (int i = 0; i < nRows; i++) {
+        freeMemMatrix(m[i]);
+    }
+    free(m);
+}
