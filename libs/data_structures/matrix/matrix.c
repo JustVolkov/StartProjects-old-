@@ -147,3 +147,61 @@ void test_swapColumns() {
     free(StartColNo2);
     freeMemMatrix(m);
 }
+
+//------------
+
+// Возвращает значение «истина», если матрица m является квадратной,
+// «ложь» – в противном случае:
+bool isSquareMatrix(Matrix* m) {
+    return m->nCols == m->nRows;
+}
+
+// Возвращает значение «истина», если матрицы m1 и m2 равны,
+// «ложь» – в противном случае:
+bool areTwoMatricesEqual(Matrix* m1, Matrix* m2) {
+    if ((m1->nCols != m2->nCols) || (m1->nRows != m2->nRows))
+        return false;
+    else {
+        for (int rowIndex = 0; rowIndex < m1->nRows; rowIndex++) {
+            for (int colIndex = 0; colIndex < m1->nCols; colIndex++) {
+                if (m1->values[rowIndex][colIndex] != m2-> values[rowIndex][colIndex])
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+// Возвращает значение «истина», если матрица m является единичной,
+// «ложь» – в противном случае:
+bool isEMatrix(Matrix* m) {
+    if (m->nCols != m->nRows)
+        return false;
+    else {
+        int sumOfRow = 0;
+        for (int rowIndex = 0; rowIndex < m->nRows; rowIndex++) {
+            for (int colIndex = 0; colIndex < m->nCols; colIndex++) {
+                sumOfRow += m->values[rowIndex][colIndex];
+            }
+            if ((sumOfRow != 1) || (m->values[rowIndex][rowIndex] != 1))
+                return false;
+        }
+        return false;
+    }
+}
+
+// Возвращает значение «истина», если матрица m является симметричной,
+// «ложь» – в противном случае:
+bool isSymmetricMatrix(Matrix* m) {
+    if (m->nCols != m->nRows)
+        return false;
+    else {
+        for (int rowIndex = 0; rowIndex < m->nRows; rowIndex++) {
+            for (int colIndex = 0; colIndex < m->nRows; colIndex++) {
+                if (m->values[rowIndex][colIndex] != m-> values[colIndex][rowIndex])
+                return false;
+            }
+        }
+        return true;
+    }
+}
