@@ -1,0 +1,3 @@
+T:/CLionProjects/C, #14, Matrices/cmake-build-debug/CMakeFiles/C___14__Matrices.dir
+T:/CLionProjects/C, #14, Matrices/cmake-build-debug/CMakeFiles/edit_cache.dir
+T:/CLionProjects/C, #14, Matrices/cmake-build-debug/CMakeFiles/rebuild_cache.dir

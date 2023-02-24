@@ -1,0 +1,4 @@
+"C:\Program Files\JetBrains\CLion\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion/bin/ninja/win/ninja.exe" -G Ninja -S "T:\CLionProjects\C, #14, Matrices" -B "T:\CLionProjects\C, #14, Matrices\cmake-build-debug"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: T:/CLionProjects/C, #14, Matrices/cmake-build-debug
