@@ -359,3 +359,22 @@ void toSquareIfMatrixIsSymmetrical(Matrix m, bool(*isSymmetricMatrix)(Matrix m))
 
 // #16.5
 
+// Выделяет память и наполняет массив суммами элементов каждой строки a размера n матрицы m.
+// Возвращает указатель на этот массив.
+int* getArrayOfSumsOfRows(Matrix* m, int(getSum)(int* a, int n)) {
+    int* sumsOfRows = malloc(sizeof(int) * m->nRows);
+    for (int rowIndex = 0; rowIndex < m->nRows; rowIndex++) {
+        sumsOfRows[rowIndex] = getSum(m->values[rowIndex], m->nRows);
+    }
+    return sumsOfRows;
+}
+
+// Получает на вход матрицу m, обрабатывает её и формирует массив sumsOfRows из сумм элементов её строк,
+// если в этом массиве не будет повторяющихся элементов (т. е. isArrayUnique == true),
+// матрица m будет транспонирована.
+void transposeMatrixHasNoEqualSumOfRows(Matrix m) {
+    int* sumsOfRows = getArrayOfSumsOfRows(&m, getSum);
+    bool isArrayUnique = isUnique(sumsOfRows, m.nRows);
+    if (isArrayUnique == true)
+        transposeSquareMatrix(&m);
+}

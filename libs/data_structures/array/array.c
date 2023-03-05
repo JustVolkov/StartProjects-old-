@@ -1,5 +1,7 @@
 #include "array.h"
 
+// #16.5
+
 // Возвращает сумму массива a размера n.
 int getSum(int* a, int n) {
     int sumOfArray = 0;
