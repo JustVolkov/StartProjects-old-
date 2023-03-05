@@ -340,3 +340,19 @@ void test_countZeroRows() {
     assert(countZeroRows(m) == 2);
     freeMemMatrix(m);
 }
+
+// Функции, которые были созданы для решения задач из  лаб. #16:
+
+// #16.4
+
+// Возводит каждый элемент квадратной матрицы m в квадрат, если она симметрична.
+void toSquareIfMatrixIsSymmetrical(Matrix m, bool(*isSymmetricMatrix)(Matrix m)) {
+    bool isSymmetrical = isSymmetricMatrix(m);
+    if (isSymmetrical == true) {
+        for (int rowIndex = 0; rowIndex < m.nRows; rowIndex++) {
+            for (int colIndex = 0; colIndex < m.nRows; colIndex++) {
+                m.values[rowIndex][colIndex] *= m.values[rowIndex][colIndex];
+            }
+        }
+    }
+}
