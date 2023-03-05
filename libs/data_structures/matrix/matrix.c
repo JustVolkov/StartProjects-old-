@@ -378,3 +378,34 @@ void transposeMatrixHasNoEqualSumOfRows(Matrix m) {
     if (isArrayUnique == true)
         transposeSquareMatrix(&m);
 }
+
+// #16.8
+
+// Возвращает минимальный элемент из специальной области матрицы m.
+int getMinInArea(Matrix m) {
+    // Самый первый элемент матрицы назначается минимальным.
+    // Далее в функции именно со значением этой переменной будут проводится сравнения всех остальных элементов.
+    int min = m.values[0][0];
+    int leftBorder, rightBorder;
+
+    // Переменная sizeOfRow заменяет "магическую константу" 6 - ширину матрицы.
+    int sizeOfRow = 6;
+
+    for (int i = 0; i < 5; i++) {
+        if (i < 2)
+            leftBorder = 0, rightBorder = sizeOfRow;
+        else if (i < 3)
+            leftBorder = 1, rightBorder = sizeOfRow;
+        else if (i < 4)
+            leftBorder = 2, rightBorder = sizeOfRow - 1;
+        else if (i < 5)
+            leftBorder = 3, rightBorder = sizeOfRow - 2;
+        int j = leftBorder;
+        while (j < rightBorder) {
+            if (m.values[i][j] < min)
+                min = m.values[i][j];
+            j++;
+        }
+    }
+    return min;
+}
