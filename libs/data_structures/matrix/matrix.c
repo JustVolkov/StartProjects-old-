@@ -428,6 +428,33 @@ int CountZeroRows(Matrix m) {
     return numberOfZeroRows;
 }
 
+// #16.17
+
+// Возвращает индекс того вектора из матрицы m, который образует наибольший угол с вектором v.
+int getVectorIndexWithMaxAngle(Matrix m, int* v) {
+    // Выделение памяти для хранения массива со значениями углов в радианах:
+    double* anglesValuesInRadians = (double*)malloc(sizeof(double) * m.nRows);
+    int angleIndex = 0;
+
+    double Lenght_v = getVectorLength(v, m.nCols);
+
+    for (int rowIndex = 0; rowIndex < m.nRows; rowIndex++) {
+        double cos = getCosine(m.values[rowIndex], v, m.nCols, Lenght_v);
+        cos = angleEqualOrLessThanPI(cos);
+        anglesValuesInRadians[angleIndex++] = cos;
+    }
+
+    double maxAngle = maxElementOfArray(anglesValuesInRadians, angleIndex);
+
+    // Проход по массиву углов (anglesValuesInRadians), сравнение вещественных чисел на равенство
+    // и возврат индекса максимального элемента из этого массива.
+    for (int i = 0; i < angleIndex; i++) {
+        if (fabs(anglesValuesInRadians[i] - maxAngle) < EPS)
+            free(anglesValuesInRadians);
+        return i;
+    }
+}
+
 // Возвращает индекс i того элемента массива a, который равен значению value,
 // а если такого значения нет, не возвращает ничего.
 int countValues(int* a, int i, int value) {
