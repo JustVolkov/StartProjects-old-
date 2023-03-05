@@ -409,3 +409,43 @@ int getMinInArea(Matrix m) {
     }
     return min;
 }
+
+// #16.14
+
+// Возвращает количество строк матрицы m, которые полностью состоят из нулей.
+int CountZeroRows(Matrix m) {
+    int sumOfRow = 0;
+    int numberOfZeroRows = 0;
+    for (int rowIndex = 0; rowIndex < m.nRows; rowIndex++) {
+        for (int colIndex = 0; colIndex < m.nCols; colIndex++) {
+            sumOfRow += m.values[rowIndex][colIndex];
+        }
+        if (sumOfRow == 0) {
+            numberOfZeroRows++;
+        }
+        sumOfRow = 0;
+    }
+    return numberOfZeroRows;
+}
+
+// Возвращает индекс i того элемента массива a, который равен значению value,
+// а если такого значения нет, не возвращает ничего.
+int countValues(int* a, int i, int value) {
+    if (a[i] == value)
+        return i;
+    return -1;
+}
+
+// Выводит из массива матриц ms размера nMatrix ту (или те) матрицы, в которой (-ых) наибольшее количество нулевых строк.
+void printMatrixWithMaxZeroRows(Matrix* ms, int nMatrix) {
+    int* arrayOfNumbersOfZeroRows = (int*)malloc(sizeof(int) * nMatrix);
+
+    for (int mxIndex = 0; mxIndex < nMatrix; mxIndex++) {
+        arrayOfNumbersOfZeroRows[mxIndex] = CountZeroRows(ms[mxIndex]);
+    }
+    int max = maxElementOfArray(arrayOfNumbersOfZeroRows, nMatrix);
+    for (int mxIndex = 0; mxIndex < nMatrix; mxIndex++) {
+        outputMatrix(ms[countValues(arrayOfNumbersOfZeroRows, mxIndex, max)]);
+    }
+    free(arrayOfNumbersOfZeroRows);
+}
