@@ -61,6 +61,12 @@ build CMakeFiles/C___14__Matrices.dir/libs/data_structures/matrix/matrix.c.obj: 
   OBJECT_DIR = CMakeFiles\C___14__Matrices.dir
   OBJECT_FILE_DIR = CMakeFiles\C___14__Matrices.dir\libs\data_structures\matrix
 
+build CMakeFiles/C___14__Matrices.dir/libs/data_structures/array/array.c.obj: C_COMPILER__C___14__Matrices_Debug T$:/CLionProjects/C,$ #14,$ Matrices/libs/data_structures/array/array.c || cmake_object_order_depends_target_C___14__Matrices
+  DEP_FILE = CMakeFiles\C___14__Matrices.dir\libs\data_structures\array\array.c.obj.d
+  FLAGS = -g -std=gnu99
+  OBJECT_DIR = CMakeFiles\C___14__Matrices.dir
+  OBJECT_FILE_DIR = CMakeFiles\C___14__Matrices.dir\libs\data_structures\array
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target C___14__Matrices
@@ -69,7 +75,7 @@ build CMakeFiles/C___14__Matrices.dir/libs/data_structures/matrix/matrix.c.obj: 
 #############################################
 # Link the executable C___14__Matrices.exe
 
-build C___14__Matrices.exe: C_EXECUTABLE_LINKER__C___14__Matrices_Debug CMakeFiles/C___14__Matrices.dir/main.c.obj CMakeFiles/C___14__Matrices.dir/libs/data_structures/matrix/matrix.c.obj
+build C___14__Matrices.exe: C_EXECUTABLE_LINKER__C___14__Matrices_Debug CMakeFiles/C___14__Matrices.dir/main.c.obj CMakeFiles/C___14__Matrices.dir/libs/data_structures/matrix/matrix.c.obj CMakeFiles/C___14__Matrices.dir/libs/data_structures/array/array.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\C___14__Matrices.dir

@@ -3,4 +3,4 @@ project(C___14__Matrices C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(C___14__Matrices main.c libs/data_structures/matrix/matrix.c libs/data_structures/matrix/matrix.h)
+add_executable(C___14__Matrices main.c libs/data_structures/matrix/matrix.c libs/data_structures/matrix/matrix.h libs/data_structures/array/array.c libs/data_structures/array/array.h)

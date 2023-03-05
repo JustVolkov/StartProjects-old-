@@ -356,3 +356,6 @@ void toSquareIfMatrixIsSymmetrical(Matrix m, bool(*isSymmetricMatrix)(Matrix m))
         }
     }
 }
+
+// #16.5
+
