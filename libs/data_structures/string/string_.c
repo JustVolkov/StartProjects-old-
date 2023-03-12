@@ -89,3 +89,30 @@ void findSpace_test(char* (findSpace)(char* s)) {
     assert(findSpace(s1) == &s1[0]);
     assert(findSpace(s2) == &s2[5]);
 }
+
+// #17.5, 17.6
+
+// Возвращает указатель на первый справа символ, отличный от пробельных,
+// расположенный (на летне памяти) начиная с rbegin и заканчивая rend;
+// если символ не найден, возвращает rend.
+char* findNonSpaceReverse(char* rbegin, char* rend) {
+    while (rbegin > rend)
+    {
+        if (isspace(*rbegin) == 0)
+            return rbegin;
+        rbegin--;
+    }
+    return rend;
+}
+
+// Возвращает указатель на первый справа пробельный символ, расположенный (на летне памяти)
+// начиная с rbegin и заканчивая rend; если символ не найден, возвращает rend.
+char* findSpaceReverse(char* rbegin, char* rend) {
+    while (rbegin > rend)
+    {
+        if (isspace(*rbegin) != 0)
+            return rbegin;
+        rbegin--;
+    }
+    return rend;
+}
