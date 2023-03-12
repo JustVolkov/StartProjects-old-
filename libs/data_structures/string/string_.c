@@ -1,5 +1,8 @@
 #include "string_.h"
 #include <assert.h>
+#include <ctype.h>
+
+// #17.1
 
 // Возвращает длину строки s.
 size_t strlen(char* begin) {
@@ -22,7 +25,7 @@ void strlen_test(int(strlen)(char* begin)) {
     assert(strlen(s4) == 0);
 }
 
-//----------
+// #17.2
 
 /* Возвращает указатель на первый элемент с кодом ch, расположенный
 (на ленте памяти) между адресами begin и end (не включая end);
@@ -46,4 +49,24 @@ void find_test(char*(find)(char* begin, char* end, int ch)) {
     int ch3 = 61;	// =
     assert(find(p_begin, p_end, ch1) == &s[3]);
     assert(find(p_begin, p_end, ch2) == &s[0]);
+}
+
+// #17.3
+
+// Возвращает указатель на первый символ, отличный от пробельных,
+// расположенный (на ленте памяти) начиная с begin и заканчивая ноль-символом.
+// Если адрес не найден, возвращает адрес первого ноль-символа.
+char* findNonSpace(char* begin) {
+    while (isspace(*begin) != 0 && *begin != '\0') {
+        begin++;
+    }
+    return begin;
+}
+
+// Тестирование функции findNonSpace.
+void findNonSpace_test(char* (findNonSpace)(char* s)) {
+    char s1[] = "\n\n\nWFFB";
+    char s2[] = "\nillf";
+    assert(findNonSpace(s1) == &s1[3]);
+    assert(findNonSpace(s2) == &s2[1]);
 }
