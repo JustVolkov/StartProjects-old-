@@ -70,3 +70,22 @@ void findNonSpace_test(char* (findNonSpace)(char* s)) {
     assert(findNonSpace(s1) == &s1[3]);
     assert(findNonSpace(s2) == &s2[1]);
 }
+
+// # 17.4
+
+// Возвращает указатель на первый пробельный символ, расположенный (на ленте памяти)
+// начиная с begin или на первый ноль-символ.
+char* findSpace(char* begin) {
+    while (isspace(*begin) == 0 && *begin != '\0') {
+        begin++;
+    }
+    return begin;
+}
+
+// Тестирование функции findSpace.
+void findSpace_test(char* (findSpace)(char* s)) {
+    char s1[] = "\n\n\nWFFB";
+    char s2[] = "code3\nx\n";
+    assert(findSpace(s1) == &s1[0]);
+    assert(findSpace(s2) == &s2[5]);
+}
