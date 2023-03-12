@@ -116,3 +116,34 @@ char* findSpaceReverse(char* rbegin, char* rend) {
     }
     return rend;
 }
+
+// #17.7
+
+// Проверяет строки lhs и rhs на равенство: если код символа lhs больше,
+// чем код соответствующего символа rsh возвращает 1, если меньше - -1;
+// если строки оказались равны, возвращает 0.
+int strcmpAnalog(char* lhs, char* rhs) {
+    while (*lhs != '\0' && *rhs != '\0') {
+        if (*lhs != *rhs) {
+            if (*lhs > * rhs)
+                return 1;
+            else
+                return -1;
+        }
+        lhs++;
+        rhs++;
+    }
+    return 0;
+}
+
+// Тестирование функции strcmpAnalog.
+void strcmpAnalog_test(int(strcmpAnalog)(char* lhs, char* rhs)) {
+    char s1[] = "cooper";	// p    112
+    char s2[] = "cover";	// o	111,	v	118
+    char s3[] = "cooler";	// l	108
+    char s4[] = "cooler";	// l	108
+    assert(strcmpAnalog(s1, s3) == 1);
+    assert(strcmpAnalog(s1, s2) == -1);
+    assert(strcmpAnalog(s3, s4) == 0);
+}
+
