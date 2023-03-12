@@ -1,6 +1,7 @@
 #include "string_.h"
 #include <assert.h>
 #include <ctype.h>
+#include <memory.h>
 
 // #17.1
 
@@ -147,3 +148,22 @@ void strcmpAnalog_test(int(strcmpAnalog)(char* lhs, char* rhs)) {
     assert(strcmpAnalog(s3, s4) == 0);
 }
 
+// #17.8
+
+// Записывает по адресу beginDestination фрагмент памяти, начиная с адреса beginSource
+// до endSource. Возвращает указатель на следующий свободный фрагмент памяти в beginDestination.
+char* copy(const char* beginSource, const char* endSource, char* beginDestination) {
+    int size = endSource - beginSource;
+    memcpy(beginDestination, beginSource, size);
+    return beginDestination + size;
+}
+
+// Тестирование функции copy.
+void copy_test(char* (copy)(const char* beginSource, const char* endSource, char* beginDestination)) {
+    char s[8] = "EXAMPLE";		// Длина - 8
+    char* beginSource = &s[0];
+    char* endSource= &s[strlen(s)];
+    char beginDestination[8];	// Длина как минимум 8 (как и у исходной строки)
+    copy(beginSource, endSource, beginDestination);
+    assert(*beginDestination == *s);
+}
