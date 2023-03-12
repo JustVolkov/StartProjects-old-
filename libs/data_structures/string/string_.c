@@ -167,3 +167,92 @@ void copy_test(char* (copy)(const char* beginSource, const char* endSource, char
     copy(beginSource, endSource, beginDestination);
     assert(*beginDestination == *s);
 }
+
+// #17.9, 17.10
+
+// Функция-предикат - проверка на то, является ли символ s
+// строчной или заглавной буквой латинского алфавита.
+bool isLetter(char s) {
+    return((s >= 65 && s <= 90) || (s >= 97 && s <= 122));
+}
+
+// Записывает по адресу beginDestination элементы из фрагмента памяти
+// начиная с beginSource до endSource, удовлетворяющие функции-пердикату isLetter.
+// Возвращает указатель на следующий свободный фрагмент в памяти.
+char* copyIf(char* beginSource, const char* endSource, char* beginDestination, bool(isLetter)(char s)) {
+    int i = 0;
+    while (beginSource < endSource && *beginSource != '\0')
+    {
+        if (isLetter(*beginSource) == true) {
+            *(beginDestination + i) = *beginSource;
+            i++;
+        }
+        beginSource++;
+    }
+    return beginDestination + i;
+}
+
+// Тестирование функции copyIf.
+void copyIf_test(char*(copyIf)(char* beginSource, const char* endSource, char* beginDestination, bool(isLetter)(char s))){
+    char s1[9] = "YEAR2002";
+    char* beginSource1 = &s1[0];
+    char* endSource1= &s1[strlen(s1)];
+    char beginDestination1[9];
+
+    copyIf(beginSource1, endSource1, beginDestination1, isLetter);
+
+    assert(beginDestination1[0] == 'Y' &&
+           beginDestination1[1] == 'E' &&
+           beginDestination1[2] == 'A' &&
+           beginDestination1[3] == 'R');
+
+    char s2[] = "50Y2H!!BT";
+    char* beginSource2 = &s2[0];
+    char* endSource2 = &s2[strlen(s2)];
+    char beginDestination2[9];
+
+    copyIf(beginSource2, endSource2, beginDestination2, isLetter);
+
+    assert(beginDestination2[0] == 'Y' &&
+           beginDestination2[1] == 'H' &&
+           beginDestination2[2] == 'B' &&
+           beginDestination2[3] == 'T');
+}
+
+// Записывает по адресу beginDestination элементы из фрагмента памяти
+// начиная с rbeginSource до rendSource, удовлетворяющие функции-пердикату isLetter.
+// Возвращает значение beginDestination.
+char* copyIfReverse(char* rbeginSource, const char* rendSource, char* beginDestination, bool(isLetter)(char s)) {
+    int i = 0;
+    while (rbeginSource > rendSource)
+    {
+        if (isLetter(*rbeginSource) == true) {
+            *(beginDestination + i) = *rbeginSource;
+            i++;
+        }
+        rbeginSource--;
+    }
+    return beginDestination;
+    // return beginDestination + i;
+}
+
+// Тестирование функции copyIfReverse.
+void copyIfReverse_test(char* (copyIfReverse)(char* beginSource, const char* endSource, char* beginDestination, bool(isLetter)(char s))) {
+    char s1[] = "1t113kg";
+    char* rbeginSource1 = &s1[0];
+    char* rendSource1 = &s1[strlen(s1)];
+    char beginDestination1[8];
+
+    copyIfReverse(rendSource1, rbeginSource1, beginDestination1, isLetter);
+
+    assert(beginDestination1[0] == 'g' && beginDestination1[1] == 'k' && beginDestination1[2] == 't');
+
+    char s2[] = "60km/h";
+    char* rbeginSource2 = &s2[0];
+    char* rendSource2 = &s2[strlen(s2)];
+    char beginDestination2[7];
+
+    copyIfReverse(rendSource2, rbeginSource2, beginDestination2, isLetter);
+
+    assert(beginDestination2[0] == 'h' && beginDestination2[1] == 'm' && beginDestination2[2] == 'k');
+}
