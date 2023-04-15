@@ -5,8 +5,14 @@
 
 #include "stdio.h"
 
+// 14.1
+
 typedef struct vector {
     int *data;          // указатель на элементы вектора
     size_t size;        // размер вектора
     size_t capacity;    // вместимость вектора
 } vector;
+
+// 14.2
+
+vector createVector(size_t  capacity);
